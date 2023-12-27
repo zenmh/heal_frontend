@@ -27,6 +27,7 @@ const Navbar = () => {
         height={100}
         width={100}
         onClick={() => push("/")}
+        className="cursor-pointer"
       />
 
       <ul className="list-none flex flex-row items-center justify-center gap-2">

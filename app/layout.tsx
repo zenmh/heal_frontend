@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { Navbar } from "@/components/shared/navbar";
+import { Footer } from "@/components/shared";
 
 export const metadata: Metadata = {
   title: "Heal",
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Navbar />
         </header>
         <main>{children}</main>
-        <footer>Footer</footer>
+        <Footer />
       </body>
     </html>
   );
