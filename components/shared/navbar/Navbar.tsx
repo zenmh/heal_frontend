@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { NavItem } from ".";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 interface INavItem {
@@ -19,13 +20,15 @@ const Navbar = () => {
   const { push } = useRouter();
 
   return (
-    <nav className="border-2 border-primary h-12 flex flex-row items-center justify-between">
-      <h2
+    <nav className="mt-1 h-12 flex flex-row items-center justify-between">
+      <Image
+        src="/images/logo.jpg"
+        alt="logo"
+        height={100}
+        width={100}
         onClick={() => push("/")}
-        className="text-3xl font-bold py-1 pr-2 cursor-pointer hover:opacity-80 transition duration-300"
-      >
-        Heal
-      </h2>
+      />
+
       <ul className="list-none flex flex-row items-center justify-center gap-2">
         {navItems.map(({ label, href }: INavItem) => (
           <NavItem key={label} onClick={() => {}} label={label} />
