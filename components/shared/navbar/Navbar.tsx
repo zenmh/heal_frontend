@@ -34,7 +34,7 @@ const Navbar = () => {
         {navItems.map(({ label, href }: INavItem) => (
           <NavItem key={label} onClick={() => {}} label={label} />
         ))}
-        <Button onClick={() => push("/signup")} variant="default">
+        <Button onClick={() => push("/auth")} variant="default">
           Sign Up
         </Button>
       </ul>
