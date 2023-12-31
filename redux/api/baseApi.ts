@@ -1,9 +1,10 @@
+import axiosBaseQuery from "@/helpers/axios/axiosBaseQuery";
 import { getBaseUrl } from "@/helpers/envConfig";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
 const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
+  baseQuery: axiosBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: () => ({}),
   tagTypes: ["user"],
 });
