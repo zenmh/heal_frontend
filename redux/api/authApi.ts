@@ -10,7 +10,15 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+    signUp: mutation({
+      query: (data) => ({
+        url: "/auth/signup",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
-export const { useSignInMutation } = authApi;
+export const { useSignInMutation, useSignUpMutation } = authApi;
