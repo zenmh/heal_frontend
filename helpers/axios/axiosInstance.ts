@@ -1,5 +1,5 @@
 import { authKey } from "@/constants/storageKeys";
-import { TGenericSuccessResponse } from "@/types/common";
+import { TGenericErrorResponse, TGenericSuccessResponse } from "@/types/common";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import axios from "axios";
 
@@ -35,7 +35,13 @@ instance.interceptors.response.use(
     return responseObject;
   },
   function (err: any) {
-    return Promise.reject(err);
+    const responseObject: TGenericErrorResponse = {
+      statusCode: err?.response?.data?.statusCode || 500,
+      message: err?.response?.data?.message || "Something went wront!!",
+      errorMessages: err?.response?.data?.message,
+    };
+
+    return responseObject;
   }
 );
 
