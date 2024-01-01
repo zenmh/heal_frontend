@@ -24,25 +24,25 @@ instance.interceptors.request.use(
 );
 
 // Handle Response
-instance.interceptors.response.use(
-  //@ts-ignore
-  function (response) {
-    const responseObject: TGenericSuccessResponse = {
-      data: response?.data?.data,
-      meta: response?.data?.meta,
-    };
+// instance.interceptors.response.use(
+//   //@ts-ignore
+//   function (response) {
+//     const responseObject: TGenericSuccessResponse = {
+//       data: response?.data?.data,
+//       meta: response?.data?.meta,
+//     };
 
-    return responseObject;
-  },
-  function (err: any) {
-    const responseObject: TGenericErrorResponse = {
-      statusCode: err?.response?.data?.statusCode || 500,
-      message: err?.response?.data?.message || "Something went wront!!",
-      errorMessages: err?.response?.data?.message,
-    };
+//     return responseObject;
+//   },
+//   function (err: any) {
+//     const responseObject: TGenericErrorResponse = {
+//       statusCode: err?.response?.data?.statusCode || 500,
+//       message: err?.response?.data?.message || "Something went wront!!",
+//       errorMessages: err?.response?.data?.message,
+//     };
 
-    return responseObject;
-  }
-);
+//     return responseObject;
+//   }
+// );
 
 export { instance };
