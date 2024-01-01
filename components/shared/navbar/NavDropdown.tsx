@@ -21,8 +21,19 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { removeUserInfo } from "@/services/authService";
+import { authKey } from "@/constants/storageKeys";
+import { useRouter } from "next/navigation";
 
 const NavDropdown = () => {
+  const { push } = useRouter();
+
+  const logOut = () => {
+    removeUserInfo(authKey);
+
+    push("/");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -65,9 +76,9 @@ const NavDropdown = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => {}}>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+        <DropdownMenuItem onClick={logOut}>
+          <LogOut className="mr-2 h-4 w-4 text-destructive" />
+          <span className="text-destructive">Log out</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
