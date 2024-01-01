@@ -1,6 +1,6 @@
 "use client";
 
-import { NavItem } from ".";
+import { NavDropdown, NavItem } from ".";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -37,6 +37,7 @@ const Navbar = () => {
         <Button onClick={() => push("/auth")} variant="default">
           Sign Up
         </Button>
+        <NavDropdown />
       </ul>
     </nav>
   );
