@@ -1,4 +1,5 @@
 import { authKey } from "@/constants/storageKeys";
+import { ResponseSuccessType } from "@/types/common";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import axios from "axios";
 
@@ -8,6 +9,7 @@ instance.defaults.headers.post["Content-Type"] = "application/json";
 instance.defaults.headers["Accept"] = "application/json";
 instance.defaults.timeout = 60000;
 
+// Handle Request
 instance.interceptors.request.use(
   function (config) {
     const accessToken = getFromLocalStorage(authKey);
@@ -15,6 +17,22 @@ instance.interceptors.request.use(
     if (accessToken) config.headers.Authorization = accessToken;
 
     return config;
+  },
+  function (err: any) {
+    return Promise.reject(err);
+  }
+);
+
+// Handle Response
+instance.interceptors.response.use(
+  //@ts-ignore
+  function (response) {
+    const responseObject: ResponseSuccessType = {
+      data: response?.data?.data,
+      meta: response?.data?.meta,
+    };
+
+    return responseObject;
   },
   function (err: any) {
     return Promise.reject(err);

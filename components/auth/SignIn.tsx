@@ -39,9 +39,9 @@ const SignIn = () => {
     try {
       const res = await singIn({ ...data }).unwrap();
 
-      if (res?.data?.accessToken) push("/profile");
+      if (res?.accessToken) push("/profile");
 
-      storeUserInfo({ accessToken: res?.data?.accessToken as string });
+      storeUserInfo({ accessToken: res?.accessToken as string });
     } catch (err: any) {
       console.log("Error From Sign In On Submit -->", err);
     } finally {

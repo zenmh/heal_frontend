@@ -4,4 +4,9 @@ type IMeta = {
   total: number;
 };
 
-export type { IMeta };
+type ResponseSuccessType = {
+  data: any;
+  meta?: IMeta;
+};
+
+export type { IMeta, ResponseSuccessType };
