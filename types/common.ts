@@ -1,12 +1,23 @@
-type IMeta = {
+type TMeta = {
   limit: number;
   page: number;
   total: number;
 };
 
-type ResponseSuccessType = {
+type TGenericSuccessResponse = {
   data: any;
-  meta?: IMeta;
+  meta?: TMeta;
 };
 
-export type { IMeta, ResponseSuccessType };
+type TGenericErrorMessage = {
+  path: string | number;
+  message: string;
+};
+
+type TGenericErrorResponse = {
+  statusCode: number;
+  message: string;
+  errorMessages: TGenericErrorMessage[];
+};
+
+export type { TMeta, TGenericSuccessResponse, TGenericErrorResponse };

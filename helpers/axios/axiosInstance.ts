@@ -1,5 +1,5 @@
 import { authKey } from "@/constants/storageKeys";
-import { ResponseSuccessType } from "@/types/common";
+import { TGenericSuccessResponse } from "@/types/common";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import axios from "axios";
 
@@ -27,7 +27,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   //@ts-ignore
   function (response) {
-    const responseObject: ResponseSuccessType = {
+    const responseObject: TGenericSuccessResponse = {
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
