@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useSignInMutation } from "@/redux/api/authApi";
-import { isLoggedIn, storeUserInfo } from "@/services/authService";
+import { storeUserInfo } from "@/services/authService";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -39,9 +39,9 @@ const SignIn = () => {
     try {
       const res = await singIn({ ...data }).unwrap();
 
-      if (res?.accessToken) push("/profile");
+      if (res?.data?.accessToken) push("/profile");
 
-      storeUserInfo({ accessToken: res?.accessToken as string });
+      storeUserInfo({ accessToken: res?.data?.accessToken as string });
     } catch (err: any) {
       console.log("Error From Sign In On Submit -->", err);
     } finally {
