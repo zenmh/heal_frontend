@@ -13,7 +13,8 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useSignInMutation } from "@/redux/api/authApi";
-import { getUserInfo, storeUserInfo } from "@/services/authService";
+import { isLoggedIn, storeUserInfo } from "@/services/authService";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -21,8 +22,6 @@ const formSchema = z.object({
 });
 
 const SignIn = () => {
-  console.log(getUserInfo());
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,12 +31,15 @@ const SignIn = () => {
   });
 
   const { handleSubmit, control, reset } = form;
+  const { push } = useRouter();
 
   const [singIn, { isLoading: signInIsLoading }] = useSignInMutation();
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       const res = await singIn({ ...data }).unwrap();
+
+      if (res?.data?.accessToken) push("/profile");
 
       storeUserInfo({ accessToken: res?.data?.accessToken as string });
     } catch (err: any) {
