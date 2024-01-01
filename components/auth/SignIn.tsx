@@ -12,6 +12,8 @@ import {
   FormItem,
   FormMessage,
 } from "../ui/form";
+import { useSignInMutation } from "@/redux/api/authApi";
+import { storeUserInfo } from "@/services/authService";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -27,11 +29,23 @@ const SignIn = () => {
     },
   });
 
-  const { handleSubmit, control } = form;
+  const { handleSubmit, control, reset } = form;
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  const [singIn, { isLoading: signInIsLoading }] = useSignInMutation();
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const res = await singIn({ ...data }).unwrap();
+
+      storeUserInfo({ accessToken: res?.accessToken as string });
+    } catch (err: any) {
+      console.log("Error From Sign In On Submit -->", err);
+    } finally {
+      reset();
+    }
   };
+
+  if (signInIsLoading) return <h1>Loading...</h1>;
 
   return (
     <Form {...form}>
@@ -68,7 +82,7 @@ const SignIn = () => {
             );
           }}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" disabled={signInIsLoading} className="w-full">
           Sing In
         </Button>
       </form>
