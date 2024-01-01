@@ -15,6 +15,8 @@ import {
 import { useSignInMutation } from "@/redux/api/authApi";
 import { storeUserInfo } from "@/services/authService";
 import { useRouter } from "next/navigation";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -32,6 +34,7 @@ const SignIn = () => {
 
   const { handleSubmit, control, reset } = form;
   const { push } = useRouter();
+  const { toast } = useToast();
 
   const [singIn, { isLoading: signInIsLoading }] = useSignInMutation();
 
@@ -44,6 +47,12 @@ const SignIn = () => {
       storeUserInfo({ accessToken: res?.data?.accessToken as string });
     } catch (err: any) {
       console.log("Error From Sign In On Submit -->", err);
+
+      toast({
+        variant: "destructive",
+        title: err?.data?.message || "Uh oh! Something went wrong.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
     } finally {
       reset();
     }

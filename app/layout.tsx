@@ -6,6 +6,7 @@ import Providers from "@/lib/Providers";
 import { Footer } from "@/components/shared";
 import { Navbar } from "@/components/shared/navbar";
 import { Inter as FontSans } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Heal",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </header>
           <main>{children}</main>
           <Footer />
+          <Toaster />
         </body>
       </html>
     </Providers>
