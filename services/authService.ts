@@ -6,11 +6,17 @@ const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
   return setToLocalStorage(authKey, accessToken);
 };
 
-const getUserInfo = () => {
+const getUserInfo = (): string => {
   const authToken = getFromLocalStorage(authKey);
 
   if (authToken) return jwtDecode(authToken);
   else return "";
 };
 
-export { storeUserInfo, getUserInfo };
+const isLoggedIn = (): boolean => {
+  const authToken = getFromLocalStorage(authKey);
+
+  return !!authToken;
+};
+
+export { storeUserInfo, getUserInfo, isLoggedIn };
