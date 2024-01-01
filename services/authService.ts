@@ -19,4 +19,8 @@ const isLoggedIn = (): boolean => {
   return !!authToken;
 };
 
-export { storeUserInfo, getUserInfo, isLoggedIn };
+const removeUserInfo = (key: string) => {
+  return localStorage.removeItem(key);
+};
+
+export { storeUserInfo, getUserInfo, isLoggedIn, removeUserInfo };
