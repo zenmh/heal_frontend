@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useSignInMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/authService";
+import { getUserInfo, storeUserInfo } from "@/services/authService";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -21,6 +21,8 @@ const formSchema = z.object({
 });
 
 const SignIn = () => {
+  console.log(getUserInfo());
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
