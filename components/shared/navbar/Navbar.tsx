@@ -31,10 +31,12 @@ const Navbar = () => {
         className="cursor-pointer"
       />
 
-      <ul className="list-none flex flex-row items-center justify-center gap-2">
-        {navItems.map(({ label, href }: INavItem) => (
-          <NavItem key={label} onClick={() => {}} label={label} />
-        ))}
+      <>
+        <ul className="list-none flex flex-row items-center justify-center gap-2">
+          {navItems.map(({ label, href }: INavItem) => (
+            <NavItem key={label} onClick={() => {}} label={label} />
+          ))}
+        </ul>
 
         {isLoggedIn() ? (
           <NavDropdown />
@@ -43,7 +45,7 @@ const Navbar = () => {
             Sign Up
           </Button>
         )}
-      </ul>
+      </>
     </nav>
   );
 };

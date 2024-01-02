@@ -12,6 +12,11 @@ import {
   FormItem,
   FormMessage,
 } from "../ui/form";
+import { storeUserInfo } from "@/services/authService";
+import { useRouter } from "next/navigation";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { useSignUpMutation } from "@/redux/api/authApi";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -29,18 +34,33 @@ const SignUp = () => {
     },
   });
 
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = form;
+  const { handleSubmit, control, reset } = form;
+  const { push } = useRouter();
+  const { toast } = useToast();
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  const [signUp, { isLoading: signUpIsLoading }] = useSignUpMutation();
 
-    reset();
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const res = await signUp({ ...data }).unwrap();
+
+      if (res?.data?.accessToken) push("/profile");
+
+      storeUserInfo({ accessToken: res?.data?.accessToken as string });
+    } catch (err: any) {
+      console.log("Error From Sign Up On Submit -->", err);
+
+      toast({
+        variant: "destructive",
+        title: err?.data?.message || "Uh oh! Something went wrong.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } finally {
+      reset();
+    }
   };
+
+  if (signUpIsLoading) return <h1>Loading...</h1>;
 
   return (
     <Form {...form}>
@@ -91,7 +111,7 @@ const SignUp = () => {
             );
           }}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" disabled={signUpIsLoading} className="w-full">
           Sing Up
         </Button>
       </form>
