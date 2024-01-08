@@ -18,7 +18,7 @@ const Doctors = () => {
       {doctors?.data?.length ? (
         <div>
           <h3 className="text-2xl font-bold">Doctors</h3>
-          <div className="flex flex-row justify-stretch flex-wrap gap-4">
+          <div className="flex flex-row justify-center flex-wrap gap-4">
             {doctors?.data.map(
               (
                 { name, image, experiences, branch, speciality }: TDoctor,
