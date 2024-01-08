@@ -1,3 +1,5 @@
+import { Branch, Speciality } from "./constant";
+
 type TDoctor = {
   id: string;
   name: string;
@@ -5,8 +7,8 @@ type TDoctor = {
   contactNo: string;
   image?: string;
   experiences: string;
-  speciality: string;
-  branch: string;
+  speciality: Speciality;
+  branch: Branch;
   reviews: any[];
   createdAt: Date;
   updatedAt: Date;

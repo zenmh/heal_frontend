@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MapPin, Star } from "lucide-react";
+import { Branch, Speciality } from "@/types/constant";
 
 interface DoctorProps {
   name: string;
   image?: string;
   experiences: string;
-  branch: string;
-  speciality: string;
+  branch: Branch;
+  speciality: Speciality;
 }
 
 const DoctorCard: FC<DoctorProps> = ({
