@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -9,10 +9,8 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -21,56 +19,67 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "@/components/ui/use-toast";
+import { slots } from "@/constants/appointment";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "../ui/command";
+import { Input } from "../ui/input";
 
-const FormSchema = z.object({
-  dob: z.date({
-    required_error: "A date of birth is required.",
+const formSchema = z.object({
+  date: z.date({
+    required_error: "Booking date is required!!",
   }),
+  slot: z.string({
+    required_error: "Please select a slot!!",
+  }),
+  name: z.string({ required_error: "Name is required!!" }).min(1),
+  contactNo: z
+    .string({ required_error: "Contact number is required!!" })
+    .min(1),
+  email: z.string({ required_error: "Email is required!!" }).min(6),
 });
 
 const BookingForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      contactNo: "",
+      email: "",
+    },
   });
+  const { control, handleSubmit, setValue } = form;
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    //     toast({
-    //       title: "You submitted the following values:",
-    //       description: (
-    //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //         </pre>
-    //       ),
-    //     });
-
-    console.log(data.dob);
-    console.log(format(data.dob, "PP"));
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    console.log(format(data.date, "PP"));
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-1">
+        <h3 className="text-2xl font-semibold">Booking Summary</h3>
         <FormField
-          control={form.control}
-          name="dob"
-          render={({ field }) => (
+          control={control}
+          name="date"
+          render={({ field: { value, onChange } }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        "w-full pl-3 text-left font-normal",
+                        !value && "text-muted-foreground"
                       )}
                     >
-                      {field.value ? (
-                        format(field.value, "PP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
+                      {value
+                        ? format(value, "PP")
+                        : "Pick The Appointment Date"}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
@@ -78,64 +87,115 @@ const BookingForm = () => {
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
+                    selected={value}
+                    onSelect={onChange}
                     disabled={(date) => date < new Date()}
                     initialFocus
                   />
                 </PopoverContent>
               </Popover>
-              <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
-          control={form.control}
-          name="dob"
-          render={({ field }) => (
+          control={control}
+          name="slot"
+          render={({ field: { value } }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant="outline"
+                      role="combobox"
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        "w-full justify-between",
+                        !value && "text-muted-foreground"
                       )}
                     >
-                      {field.value ? (
-                        format(field.value, "PP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      {value
+                        ? slots.find((slot) => slot === value)
+                        : "Select A Slot"}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
-                  />
+                <PopoverContent className="w-full p-0">
+                  <Command>
+                    <CommandInput placeholder="Search slot..." />
+                    <CommandEmpty>No slot found.</CommandEmpty>
+                    <CommandGroup>
+                      {slots.map((slot) => (
+                        <CommandItem
+                          value={slot}
+                          key={slot}
+                          onSelect={() => {
+                            setValue("slot", slot);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              slot === value ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                          {slot}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </Command>
                 </PopoverContent>
               </Popover>
-              <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="text" placeholder="Your Name" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={control}
+          name="contactNo"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="text" placeholder="Password" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={control}
+          name="email"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="email" placeholder="Enter Email" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <Button type="submit" className="w-full">
+          Book An Appointment
+        </Button>
       </form>
     </Form>
   );
