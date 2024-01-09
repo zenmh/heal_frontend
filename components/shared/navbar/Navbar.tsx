@@ -12,7 +12,7 @@ interface INavItem {
 }
 
 const navItems: INavItem[] = [
-  { label: "Doctors", href: "/" },
+  { label: "Doctors", href: "/doctors" },
   { label: "Medicine", href: "/" },
   { label: "Contact", href: "/" },
 ];
@@ -34,7 +34,7 @@ const Navbar = () => {
       <>
         <ul className="list-none flex flex-row items-center justify-center gap-2">
           {navItems.map(({ label, href }: INavItem) => (
-            <NavItem key={label} onClick={() => {}} label={label} />
+            <NavItem key={label} label={label} href={href} />
           ))}
         </ul>
 

@@ -4,8 +4,10 @@ import { DoctorCard } from "@/components/doctor";
 import { Button } from "@/components/ui/button";
 import { useGetDoctorsQuery } from "@/redux/api/doctorApi";
 import { TDoctor } from "@/types/doctor";
+import { useRouter } from "next/navigation";
 
 const Doctors = () => {
+  const { push } = useRouter();
   const { data: doctors, isLoading: getDoctorsIsLoading } =
     useGetDoctorsQuery(undefined);
 
@@ -21,11 +23,12 @@ const Doctors = () => {
           <div className="flex flex-row justify-center flex-wrap gap-4">
             {doctors?.data.map(
               (
-                { name, image, experiences, branch, speciality }: TDoctor,
+                { id, name, image, experiences, branch, speciality }: TDoctor,
                 i: number
               ) => (
                 <DoctorCard
                   key={i}
+                  id={id}
                   name={name}
                   image={image}
                   experiences={experiences}
@@ -43,7 +46,7 @@ const Doctors = () => {
               Sorry, No Doctors Are Abailable Now!
             </h3>
             <div className="flex flex-row items-center justify-center mt-2">
-              <Button>Back To Home</Button>
+              <Button onClick={() => push("/")}>Back To Home</Button>
             </div>
           </div>
         </div>

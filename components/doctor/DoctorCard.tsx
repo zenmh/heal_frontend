@@ -9,8 +9,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MapPin, Star } from "lucide-react";
 import { Branch, Speciality } from "@/types/constant";
+import { useRouter } from "next/navigation";
 
 interface DoctorProps {
+  id: string;
   name: string;
   image?: string;
   experiences: string;
@@ -19,12 +21,15 @@ interface DoctorProps {
 }
 
 const DoctorCard: FC<DoctorProps> = ({
+  id,
   name,
   image,
   experiences,
   branch,
   speciality,
 }) => {
+  const { push } = useRouter();
+
   return (
     <Card className="w-[300px] p-0">
       <CardHeader className="flex flex-row items-center justify-center m-0 p-0">
@@ -58,7 +63,9 @@ const DoctorCard: FC<DoctorProps> = ({
         </div>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <Button className="w-full">Visit Profile</Button>
+        <Button onClick={() => push(`/doctors/${id}`)} className="w-full">
+          Visit Profile
+        </Button>
       </CardFooter>
     </Card>
   );
