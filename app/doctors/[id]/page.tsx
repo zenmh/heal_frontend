@@ -1,5 +1,6 @@
 "use client";
 
+import { BookingForm } from "@/components/doctor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetDoctorQuery } from "@/redux/api/doctorApi";
 import { AtSign, MapPin, Phone, Star } from "lucide-react";
@@ -119,6 +120,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
       </div>
       <div className="lg:col-span-1 md:col-span-2 border-2 border-primary">
         <h3 className="text-2xl font-semibold">Booking Summary</h3>
+        <BookingForm />
       </div>
     </section>
   );
