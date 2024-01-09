@@ -4,9 +4,8 @@ const doctorApi = baseApi.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
     getDoctor: query({
       query: (id) => ({
-        url: "/doctors",
+        url: `/doctors/${id}`,
         method: "GET",
-        params: { id },
       }),
     }),
     getDoctors: query({
@@ -19,4 +18,4 @@ const doctorApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetDoctorsQuery } = doctorApi;
+export const { useGetDoctorQuery, useGetDoctorsQuery } = doctorApi;
