@@ -11,8 +11,6 @@ const Doctors = () => {
   const { data: doctors, isLoading: getDoctorsIsLoading } =
     useGetDoctorsQuery(undefined);
 
-  console.log(doctors);
-
   if (getDoctorsIsLoading) return <p>Loading...</p>;
 
   return (

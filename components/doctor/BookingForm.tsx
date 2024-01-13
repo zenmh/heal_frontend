@@ -28,6 +28,11 @@ import {
   CommandItem,
 } from "../ui/command";
 import { Input } from "../ui/input";
+import { FC } from "react";
+
+interface BookingFormProps {
+  doctorId: string;
+}
 
 const formSchema = z.object({
   date: z.date({
@@ -43,7 +48,7 @@ const formSchema = z.object({
   email: z.string({ required_error: "Email is required!!" }).min(6),
 });
 
-const BookingForm = () => {
+const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,8 +59,14 @@ const BookingForm = () => {
   });
   const { control, handleSubmit, setValue } = form;
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(format(data.date, "PP"));
+  const onSubmit = ({ date, ...others }: z.infer<typeof formSchema>) => {
+    const data = {
+      date: format(date, "PP"),
+      doctorId,
+      ...others,
+    };
+
+    console.log(data);
   };
 
   return (
@@ -172,7 +183,7 @@ const BookingForm = () => {
             return (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="text" placeholder="Password" />
+                  <Input {...field} type="text" placeholder="Contact Number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

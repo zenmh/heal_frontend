@@ -119,7 +119,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
         </Tabs>
       </div>
       <div className="lg:col-span-1 md:col-span-2 border-2 border-primary">
-        <BookingForm />
+        <BookingForm doctorId={id} />
       </div>
     </section>
   );
