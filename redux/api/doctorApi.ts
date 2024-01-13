@@ -1,7 +1,7 @@
 import baseApi from "./baseApi";
 
 const doctorApi = baseApi.injectEndpoints({
-  endpoints: ({ query, mutation }) => ({
+  endpoints: ({ query }) => ({
     getDoctor: query({
       query: (id) => ({
         url: `/doctors/${id}`,

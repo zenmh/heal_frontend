@@ -1,7 +1,7 @@
 import baseApi from "./baseApi";
 
 const authApi = baseApi.injectEndpoints({
-  endpoints: ({ query, mutation }) => ({
+  endpoints: ({ mutation }) => ({
     signIn: mutation({
       query: (data) => ({
         url: "/auth/signin",
