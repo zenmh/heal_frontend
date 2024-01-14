@@ -18,7 +18,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/components/ui/use-toast";
 import { slots } from "@/constants/appointment";
 import {
   Command,
@@ -30,7 +29,7 @@ import {
 import { Input } from "../ui/input";
 import { FC } from "react";
 import { useBookAnAppointmentMutation } from "@/redux/api/appointmentApi";
-import { ToastAction } from "../ui/toast";
+import { ErrorToast, SuccessToast } from "../shared/toasts";
 
 interface BookingFormProps {
   doctorId: string;
@@ -70,17 +69,13 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
         ...others,
       };
 
-      const res = await bookAnAppointment({ data }).unwrap();
+      const res = await bookAnAppointment(data).unwrap();
 
-      console.log(res);
+      SuccessToast({ title: res?.message as string });
     } catch (err: any) {
       console.log("Error From Appointment Booking On Submit -->", err);
 
-      toast({
-        variant: "destructive",
-        title: err?.data?.message || "Uh oh! Something went wrong.",
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
-      });
+      ErrorToast({ title: err?.data?.message as string });
     }
   };
 

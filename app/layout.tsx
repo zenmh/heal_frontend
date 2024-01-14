@@ -6,6 +6,7 @@ import Providers from "@/lib/Providers";
 import { Footer } from "@/components/shared";
 import { Navbar } from "@/components/shared/navbar";
 import { Inter as FontSans } from "next/font/google";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main>{children}</main>
           <Footer />
           <Toaster />
+          <Sonner />
         </body>
       </html>
     </Providers>
