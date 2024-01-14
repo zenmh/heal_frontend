@@ -83,7 +83,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-1">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-2">
         <h3 className="text-2xl font-semibold">Booking Summary</h3>
         <FormField
           control={control}

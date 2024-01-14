@@ -23,7 +23,7 @@ const Info: FC<InfoProps> = ({
   speciality,
 }) => {
   return (
-    <div className="rounded-lg flex flex-col md:flex-row items-center">
+    <div className="rounded-lg flex flex-col md:flex-row items-center bg-secondary">
       <Image
         src={image ? image : "/images/doctor_avatar.webp"}
         alt="doctor"

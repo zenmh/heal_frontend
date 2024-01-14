@@ -37,7 +37,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
         />
         <Tabs
           defaultValue="about"
-          className="w-full border-2 border-green-600 rounded-lg mt-4"
+          className="w-full mt-4 bg-secondary p-1 rounded-md"
         >
           <TabsList className="w-full py-6">
             <TabsTrigger
@@ -66,7 +66,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
           </div>
         </Tabs>
       </div>
-      <div className="lg:col-span-1 md:col-span-2 border-2 border-primary">
+      <div className="lg:col-span-1 md:col-span-2 bg-secondary rounded-md">
         <BookingForm doctorId={id} />
       </div>
     </section>

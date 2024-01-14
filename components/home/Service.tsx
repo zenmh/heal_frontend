@@ -21,7 +21,7 @@ const Service: FC<ServiceProps> = ({ title, description, href }) => {
   return (
     <Card
       onClick={() => push(href)}
-      className="w-[350px] p-4 hover:shadow-md transition duration-300 cursor-pointer"
+      className="w-[350px] p-4 hover:shadow-md transition duration-300 cursor-pointer bg-secondary"
     >
       <CardHeader>
         <CardTitle>{title}</CardTitle>
