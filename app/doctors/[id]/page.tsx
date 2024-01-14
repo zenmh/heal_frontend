@@ -1,6 +1,6 @@
 "use client";
 
-import { About, BookingForm } from "@/components/doctor";
+import { About, BookingForm, LocationAndContact } from "@/components/doctor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetDoctorQuery } from "@/redux/api/doctorApi";
 import { AtSign, MapPin, Phone, Star } from "lucide-react";
@@ -13,6 +13,8 @@ interface DoctorDetailsProps {
 
 const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
   const { data: doctor, isLoading: getDoctorIsLoading } = useGetDoctorQuery(id);
+
+  console.log(doctor);
 
   if (getDoctorIsLoading) return <p>Loading...</p>;
 
@@ -101,19 +103,10 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
           </TabsList>
           <div className="p-4">
             <About />
-            <TabsContent value="location_and_contact">
-              <p>
-                <span className="font-semibold">Branch:</span>&nbsp;
-                {doctor?.data?.branch.slice(0, 1)}
-                <span className="lowercase">
-                  {doctor?.data?.branch.slice(1)}
-                </span>
-              </p>
-              <p>
-                <span className="font-semibold">Contact:</span>&nbsp;
-                +880&nbsp;1{doctor?.data?.contactNo}
-              </p>
-            </TabsContent>
+            <LocationAndContact
+              branch={doctor?.data?.branch}
+              contactNo={doctor?.data?.contactNo}
+            />
             <TabsContent value="reviews">Reviews</TabsContent>
           </div>
         </Tabs>
