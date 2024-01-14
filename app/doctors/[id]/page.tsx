@@ -17,10 +17,11 @@ interface DoctorDetailsProps {
 
 const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
   const { data: doctor, isLoading } = useGetDoctorQuery(id);
-  const { name, image, experiences, branch, email, contactNo, speciality } =
-    doctor?.data;
 
   if (isLoading) return <p>Loading...</p>;
+
+  const { name, image, experiences, branch, email, contactNo, speciality } =
+    doctor?.data;
 
   return (
     <section className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
