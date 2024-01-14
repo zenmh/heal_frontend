@@ -1,6 +1,11 @@
 "use client";
 
-import { About, BookingForm, LocationAndContact } from "@/components/doctor";
+import {
+  About,
+  BookingForm,
+  LocationAndContact,
+  Reviews,
+} from "@/components/doctor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetDoctorQuery } from "@/redux/api/doctorApi";
 import { AtSign, MapPin, Phone, Star } from "lucide-react";
@@ -107,7 +112,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
               branch={doctor?.data?.branch}
               contactNo={doctor?.data?.contactNo}
             />
-            <TabsContent value="reviews">Reviews</TabsContent>
+            <Reviews />
           </div>
         </Tabs>
       </div>
