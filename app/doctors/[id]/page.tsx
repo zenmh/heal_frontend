@@ -6,7 +6,7 @@ import {
   LocationAndContact,
   Reviews,
 } from "@/components/doctor";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetDoctorQuery } from "@/redux/api/doctorApi";
 import { AtSign, MapPin, Phone, Star } from "lucide-react";
 import Image from "next/image";
@@ -18,8 +18,6 @@ interface DoctorDetailsProps {
 
 const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
   const { data: doctor, isLoading: getDoctorIsLoading } = useGetDoctorQuery(id);
-
-  console.log(doctor);
 
   if (getDoctorIsLoading) return <p>Loading...</p>;
 
