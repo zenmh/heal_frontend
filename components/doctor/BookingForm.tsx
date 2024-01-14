@@ -29,6 +29,8 @@ import {
 } from "../ui/command";
 import { Input } from "../ui/input";
 import { FC } from "react";
+import { useBookAnAppointmentMutation } from "@/redux/api/appointmentApi";
+import { ToastAction } from "../ui/toast";
 
 interface BookingFormProps {
   doctorId: string;
@@ -58,16 +60,31 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
     },
   });
   const { control, handleSubmit, setValue } = form;
+  const [bookAnAppointment, { isLoading }] = useBookAnAppointmentMutation();
 
-  const onSubmit = ({ date, ...others }: z.infer<typeof formSchema>) => {
-    const data = {
-      date: format(date, "PP"),
-      doctorId,
-      ...others,
-    };
+  const onSubmit = async ({ date, ...others }: z.infer<typeof formSchema>) => {
+    try {
+      const data = {
+        date: format(date, "PP"),
+        doctorId,
+        ...others,
+      };
 
-    console.log(data);
+      const res = await bookAnAppointment({ data }).unwrap();
+
+      console.log(res);
+    } catch (err: any) {
+      console.log("Error From Appointment Booking On Submit -->", err);
+
+      toast({
+        variant: "destructive",
+        title: err?.data?.message || "Uh oh! Something went wrong.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    }
   };
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <Form {...form}>
@@ -204,7 +221,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
             );
           }}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isLoading}>
           Book An Appointment
         </Button>
       </form>
