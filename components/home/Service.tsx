@@ -1,25 +1,32 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { FC } from "react";
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
-const Service = () => {
+interface ServiceProps {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const Service: FC<ServiceProps> = ({ title, description, href }) => {
+  const { push } = useRouter();
+
   return (
-    <Card className="w-[350px]">
+    <Card
+      onClick={() => push(href)}
+      className="w-[350px] p-4 hover:shadow-md transition duration-300 cursor-pointer"
+    >
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent>Hello</CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
     </Card>
   );
 };
