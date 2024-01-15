@@ -1,6 +1,5 @@
 "use client";
 
-import { PhoneBottombar } from "@/components/shared/bottombar";
 import { DesktopSidebar } from "@/components/shared/sidebar";
 import { isLoggedIn } from "@/services/authService";
 import { useRouter } from "next/navigation";
@@ -25,10 +24,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     );
 
   return (
-    <div className="h-full">
-      <DesktopSidebar>sidebar</DesktopSidebar>
-      <PhoneBottombar>PhoneBottombar</PhoneBottombar>
-      <main className="h-full">{children}</main>
+    <div className="h-screen flex felx-col justify-start gap-6">
+      <DesktopSidebar />
+      <main className="w-full border-2 border-primary">{children}</main>
     </div>
   );
 };
