@@ -1,5 +1,6 @@
 "use client";
 
+import { Sidebar } from "@/components/shared/sidebar";
 import { isLoggedIn } from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -23,9 +24,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     );
 
   return (
-    <div className="flex flex-row items-center justify-evenly">
-      <aside>Sidebar</aside>
-      <div>{children}</div>
+    <div className="h-full">
+      <Sidebar />
     </div>
   );
 };
