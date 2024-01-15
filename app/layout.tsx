@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import Providers from "@/lib/Providers";
-import { Footer } from "@/components/shared";
 import { Navbar } from "@/components/shared/navbar";
 import { Inter as FontSans } from "next/font/google";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
   title: "Heal",

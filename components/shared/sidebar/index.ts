@@ -1,3 +1,3 @@
-import Sidebar from "./Sidebar";
+import DesktopSidebar from "./DesktopSidebar";
 
-export { Sidebar };
+export { DesktopSidebar };

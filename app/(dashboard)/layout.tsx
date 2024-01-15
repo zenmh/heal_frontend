@@ -1,6 +1,7 @@
 "use client";
 
-import { Sidebar } from "@/components/shared/sidebar";
+import { PhoneBottomBar } from "@/components/shared/bottombar";
+import { DesktopSidebar } from "@/components/shared/sidebar";
 import { isLoggedIn } from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -25,7 +26,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="h-full">
-      <Sidebar />
+      <DesktopSidebar />
+      <PhoneBottomBar />
+      <main className="h-full">{children}</main>
     </div>
   );
 };
