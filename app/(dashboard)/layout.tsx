@@ -26,8 +26,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="h-full">
-      <DesktopSidebar />
-      <PhoneBottombar />
+      <DesktopSidebar>sidebar</DesktopSidebar>
+      <PhoneBottombar>PhoneBottombar</PhoneBottombar>
       <main className="h-full">{children}</main>
     </div>
   );
