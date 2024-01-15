@@ -1,3 +1,3 @@
-import PhoneBottomBar from "./PhoneBottomBar";
+import PhoneBottombar from "./PhoneBottomBar";
 
-export { PhoneBottomBar };
+export { PhoneBottombar };
