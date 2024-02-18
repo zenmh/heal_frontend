@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { CgLogOut } from "react-icons/cg";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -36,7 +36,7 @@ const NavDropdown = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={logOut}>
-            <LogOut className="mr-2 h-4 w-4 text-destructive" />
+            <CgLogOut className="mr-2 h-4 w-4 text-destructive" />
             <span className="text-destructive">Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>

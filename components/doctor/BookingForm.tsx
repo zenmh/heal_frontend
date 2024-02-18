@@ -1,7 +1,9 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
+import { FiChevronsUp } from "react-icons/fi";
+import { CiSquareCheck } from "react-icons/ci";
+import { FaCalendarDay } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -103,7 +105,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
                       {value
                         ? format(value, "PP")
                         : "Pick The Appointment Date"}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      <FaCalendarDay className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -140,7 +142,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
                       {value
                         ? slots.find((slot) => slot === value)
                         : "Select A Slot"}
-                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <FiChevronsUp className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -157,7 +159,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
                             setValue("slot", slot);
                           }}
                         >
-                          <Check
+                          <CiSquareCheck
                             className={cn(
                               "mr-2 h-4 w-4",
                               slot === value ? "opacity-100" : "opacity-0"

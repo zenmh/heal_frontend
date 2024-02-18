@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Branch, Speciality } from "@/types/constant";
-import { AtSign, MapPin, Phone, Star } from "lucide-react";
+import { FiAtSign, FiMapPin, FiPhone, FiStar } from "react-icons/fi";
 
 interface InfoProps {
   name: string;
@@ -43,22 +43,22 @@ const Info: FC<InfoProps> = ({
             {Array(5)
               .fill(null)
               .map((_, i: number) => (
-                <Star key={i} fill="gold" color="gold" size={20} />
+                <FiStar key={i} fill="gold" color="gold" size={20} />
               ))}
           </span>
           <span className="text-gray-400 ml-4">(4/5)</span>
         </div>
         <div className="flex flex-row items-center justify-start mt-8">
-          <Phone size={20} color="#00ACB1" />
+          <FiPhone size={20} color="#00ACB1" />
           &nbsp;
           <span className="text-gray-400">+880&nbsp;1{contactNo}</span>
         </div>
         <div className="flex flex-row items-center justify-start my-3">
-          <AtSign size={20} color="#00ACB1" />
+          <FiAtSign size={20} color="#00ACB1" />
           &nbsp;<span className="text-gray-400">{email}</span>
         </div>
         <div className="flex flex-row items-center justify-start">
-          <MapPin size={20} color="#00ACB1" />
+          <FiMapPin size={20} color="#00ACB1" />
           &nbsp;
           <span className="text-gray-400">
             {branch.slice(0, 1)}

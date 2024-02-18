@@ -7,7 +7,8 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { MapPin, Star } from "lucide-react";
+import { CiStar } from "react-icons/ci";
+import { LuMapPin } from "react-icons/lu";
 import { Branch, Speciality } from "@/types/constant";
 import { useRouter } from "next/navigation";
 
@@ -50,7 +51,7 @@ const DoctorCard: FC<DoctorProps> = ({
         <p className="mb-1">{speciality}</p>
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
-            <MapPin className="mr-2" size={18} />
+            <LuMapPin className="mr-2" size={18} />
             <p>
               {branch.slice(0, 1)}
               <span className="lowercase">{branch.slice(1)}</span>
@@ -58,7 +59,7 @@ const DoctorCard: FC<DoctorProps> = ({
           </div>
           <div className="flex flex-row items-center">
             <span className="mr-1">{4.5}</span>
-            <Star size={18} fill="gold" color="gold" className="mt-[-1px]" />
+            <CiStar size={18} fill="gold" color="gold" className="mt-[-1px]" />
           </div>
         </div>
       </CardContent>
