@@ -1,7 +1,7 @@
-import { TabsContent } from "../ui/tabs";
+import { TabsContent } from "@/components/ui/tabs";
 
-const About = () => {
-  return <TabsContent value="about">About ....</TabsContent>;
+const About = ({ about }: { about: string }) => {
+  return <TabsContent value="about">{about}</TabsContent>;
 };
 
 export default About;

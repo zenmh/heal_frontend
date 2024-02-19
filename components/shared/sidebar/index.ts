@@ -1,4 +1,4 @@
 import DesktopSidebar from "./DesktopSidebar";
-import DesktopSidebarItem from "./DesktopSidebarItem";
+import DesktopSidebarItems from "./DesktopSidebarItems";
 
-export { DesktopSidebar, DesktopSidebarItem };
+export { DesktopSidebar, DesktopSidebarItems };

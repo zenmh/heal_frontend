@@ -1,13 +1,18 @@
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { FC } from "react";
+import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
 import { FiChevronsUp } from "react-icons/fi";
 import { CiSquareCheck } from "react-icons/ci";
-import { FaCalendarDay } from "react-icons/fa6";
-import { useForm } from "react-hook-form";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { FaCalendarDay } from "react-icons/fa6";
+import { slots } from "@/constants/appointment";
 import { Calendar } from "@/components/ui/calendar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ErrorToast, SuccessToast } from "@/components/shared/toasts";
+import { useBookAnAppointmentMutation } from "@/redux/api/appointmentApi";
 import {
   Form,
   FormControl,
@@ -20,18 +25,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { slots } from "@/constants/appointment";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "../ui/command";
-import { Input } from "../ui/input";
-import { FC } from "react";
-import { useBookAnAppointmentMutation } from "@/redux/api/appointmentApi";
-import { ErrorToast, SuccessToast } from "../shared/toasts";
+} from "@/components/ui/command";
 
 interface BookingFormProps {
   doctorId: string;
@@ -141,7 +141,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
                     >
                       {value
                         ? slots.find((slot) => slot === value)
-                        : "Select A Slot"}
+                        : "Select a slot"}
                       <FiChevronsUp className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
@@ -183,7 +183,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
             return (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="text" placeholder="Your Name" />
+                  <Input {...field} type="text" placeholder="Your name" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -197,7 +197,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
             return (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="text" placeholder="Contact Number" />
+                  <Input {...field} type="text" placeholder="Contact number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -211,7 +211,7 @@ const BookingForm: FC<BookingFormProps> = ({ doctorId }) => {
             return (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="Enter Email" />
+                  <Input {...field} type="email" placeholder="Enter email" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

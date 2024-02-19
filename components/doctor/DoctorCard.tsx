@@ -6,22 +6,22 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CiStar } from "react-icons/ci";
 import { LuMapPin } from "react-icons/lu";
-import { Branch, Speciality } from "@/types/constant";
+import { TBranch, TSpeciality } from "@/types/constant";
 import { useRouter } from "next/navigation";
 
-interface DoctorProps {
+interface DoctorCardProps {
   id: string;
   name: string;
   image?: string;
   experiences: string;
-  branch: Branch;
-  speciality: Speciality;
+  branch: TBranch;
+  speciality: TSpeciality;
 }
 
-const DoctorCard: FC<DoctorProps> = ({
+const DoctorCard: FC<DoctorCardProps> = ({
   id,
   name,
   image,

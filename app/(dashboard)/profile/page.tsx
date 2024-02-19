@@ -1,5 +1,5 @@
-const Profile = () => {
+const ProfilePage = () => {
   return <section>Profiel</section>;
 };
 
-export default Profile;
+export default ProfilePage;

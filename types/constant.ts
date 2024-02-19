@@ -1,4 +1,4 @@
-type Speciality =
+type TSpeciality =
   | "THYROID"
   | "EYE"
   | "NEUROLOGY"
@@ -10,7 +10,7 @@ type Speciality =
   | "HAEMATOLOGY"
   | "GYNAECOLOGY";
 
-type Branch =
+type TBranch =
   | "BARISHAL"
   | "CHATTOGRAM"
   | "DHAKA"
@@ -20,4 +20,4 @@ type Branch =
   | "MYMENSINGH"
   | "SYLHET";
 
-export type { Speciality, Branch };
+export type { TSpeciality, TBranch };

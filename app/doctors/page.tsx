@@ -8,10 +8,11 @@ import { useRouter } from "next/navigation";
 
 const Doctors = () => {
   const { push } = useRouter();
-  const { data: doctors, isLoading: getDoctorsIsLoading } =
-    useGetDoctorsQuery(undefined);
+  const { data: doctors, isLoading } = useGetDoctorsQuery(undefined);
 
-  if (getDoctorsIsLoading) return <p>Loading...</p>;
+  console.log(doctors);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <section>
@@ -20,12 +21,15 @@ const Doctors = () => {
           <h3 className="text-2xl font-bold">Doctors</h3>
           <div className="flex flex-row justify-center flex-wrap gap-4">
             {doctors?.data.map(
-              (
-                { id, name, image, experiences, branch, speciality }: TDoctor,
-                i: number
-              ) => (
+              ({
+                id,
+                experiences,
+                branch,
+                speciality,
+                user: { name, image },
+              }: TDoctor) => (
                 <DoctorCard
-                  key={i}
+                  key={id}
                   id={id}
                   name={name}
                   image={image}

@@ -20,8 +20,14 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
 
   if (isLoading) return <p>Loading...</p>;
 
-  const { name, image, experiences, branch, email, contactNo, speciality } =
-    doctor?.data;
+  const {
+    experiences,
+    branch,
+    contactNo,
+    speciality,
+    user: { name, image, email },
+    about,
+  } = doctor?.data;
 
   return (
     <section className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
@@ -60,7 +66,7 @@ const DoctorDetails: FC<DoctorDetailsProps> = ({ params: { id } }) => {
             </TabsTrigger>
           </TabsList>
           <div className="p-4">
-            <About />
+            <About about={about} />
             <LocationAndContact branch={branch} contactNo={contactNo} />
             <Reviews />
           </div>

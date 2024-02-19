@@ -1,17 +1,18 @@
-import { Branch, Speciality } from "./constant";
+import { TBranch, TSpeciality } from "./constant";
+import { TUser } from "./user";
 
 type TDoctor = {
   id: string;
-  name: string;
-  email: string;
   contactNo: string;
-  image?: string;
   experiences: string;
-  speciality: Speciality;
-  branch: Branch;
-  reviews: any[];
-  createdAt: Date;
-  updatedAt: Date;
+  about: string;
+  visit: number;
+  speciality: TSpeciality;
+  branch: TBranch;
+  userId: string;
+  user: TUser;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type { TDoctor };
